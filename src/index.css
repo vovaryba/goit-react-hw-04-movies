@@ -23,6 +23,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+nav {
+  padding: 20px;
+  box-shadow: 0px 2px 4px #c6c7c6;
+}
+
 img {
   display: block;
   max-width: 100%;

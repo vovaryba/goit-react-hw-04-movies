@@ -1,0 +1,21 @@
+.main_information {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #c6c7c6;
+}
+.poster {
+  width: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+.genres {
+  display: flex;
+}
+.genre {
+  margin-top: 0;
+}
+.genre:not(:first-child) {
+  margin-left: 15px;
+}

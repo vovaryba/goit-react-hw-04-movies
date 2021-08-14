@@ -1,0 +1,10 @@
+.link {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+}
+
+.active {
+  color: tomato;
+}
