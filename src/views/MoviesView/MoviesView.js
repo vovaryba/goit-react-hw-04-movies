@@ -1,5 +1,11 @@
-import { useState, Suspense } from 'react';
-import { Link, Route, useRouteMatch, useLocation } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import {
+  Link,
+  Route,
+  useRouteMatch,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import slugify from 'slugify';
 import * as moviesAPI from '../../services/movies-api';
 
@@ -10,9 +16,20 @@ const makeSlug = string =>
 
 function MoviesView() {
   const location = useLocation();
+  const history = useHistory();
   const { url } = useRouteMatch();
   const [movies, setMovies] = useState(null);
   const [query, setQuery] = useState('');
+  const searchQuery = new URLSearchParams(location.search).get('query');
+
+  useEffect(() => {
+    if (!searchQuery) {
+      return;
+    }
+    moviesAPI
+      .fetchMovieSearch(searchQuery)
+      .then(movies => setMovies(movies.results));
+  }, [searchQuery]);
 
   const buttonClick = () => {
     moviesAPI.fetchMovieSearch(query).then(movies => setMovies(movies.results));
@@ -24,6 +41,7 @@ function MoviesView() {
 
   const handleSubmit = event => {
     event.preventDefault();
+    history.push({ ...location, search: `query=${query}` });
 
     setQuery('');
   };
